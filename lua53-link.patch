@@ -1,10 +1,10 @@
---- lua-5.2.1/src/Makefile.orig	2012-03-09 17:32:16.000000000 +0100
-+++ lua-5.2.1/src/Makefile	2012-06-25 20:20:17.372198014 +0200
+--- lua-5.3.1/src/Makefile.orig	2012-03-09 17:32:16.000000000 +0100
++++ lua-5.3.1/src/Makefile	2012-06-25 20:20:17.372198014 +0200
 @@ -46,24 +46,32 @@
  ALL_T= $(LUA_A) $(LUA_T) $(LUAC_T)
  ALL_A= $(LUA_A)
  
-+V=5.2
++V=5.3
 +
  # Targets start here.
  default: $(PLAT)
