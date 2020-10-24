@@ -7,7 +7,7 @@ Summary:	A simple lightweight powerful embeddable programming language
 Summary(pl.UTF-8):	Prosty, lekki ale potężny, osadzalny język programowania
 Name:		lua54
 Version:	5.4.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		Development/Languages
 Source0:	http://www.lua.org/ftp/lua-%{version}.tar.gz
@@ -189,7 +189,7 @@ Libs: -L${libdir} -llua5.4 -ldl -lm
 EOF
 
 %if %{with default_lua}
-ln -sf /%{_lib}/liblua5.4.so $RPM_BUILD_ROOT%{_libdir}/liblua.so
+ln -sf /%{_lib}/liblua.so.5.4 $RPM_BUILD_ROOT%{_libdir}/liblua.so
 ln -sf liblua5.4.a $RPM_BUILD_ROOT%{_libdir}/liblua.a
 ln -sf lua5.4 $RPM_BUILD_ROOT%{_includedir}/lua
 ln -sf lua5.4.pc $RPM_BUILD_ROOT%{_pkgconfigdir}/lua.pc
