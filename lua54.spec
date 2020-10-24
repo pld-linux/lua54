@@ -133,7 +133,6 @@ sed -i  -e '/#define LUA_ROOT/s,/usr/local/,%{_prefix}/,' \
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_libdir}/lua}
 
 %{__make} install \
 	INSTALL_TOP=$RPM_BUILD_ROOT%{_prefix} \
@@ -154,8 +153,14 @@ done
 %{__mv} $RPM_BUILD_ROOT%{_libdir}/liblua{,5.4}.a
 
 # install shared library
+%if %{with default_lua}
+install -d $RPM_BUILD_ROOT/%{_lib}
+install src/liblua.so.5.4 $RPM_BUILD_ROOT/%{_lib}
+ln -sf /%{_lib}/liblua.so.5.4 $RPM_BUILD_ROOT%{_libdir}/liblua5.4.so
+%else
 install src/liblua.so.5.4 $RPM_BUILD_ROOT%{_libdir}
 ln -sf liblua.so.5.4 $RPM_BUILD_ROOT%{_libdir}/liblua5.4.so
+%endif
 
 %if %{with luastatic}
 install lua.static $RPM_BUILD_ROOT%{_bindir}/lua5.4.static
@@ -184,7 +189,7 @@ Libs: -L${libdir} -llua5.4 -ldl -lm
 EOF
 
 %if %{with default_lua}
-ln -sf liblua5.4.so $RPM_BUILD_ROOT%{_libdir}/liblua.so
+ln -sf /%{_lib}/liblua5.4.so $RPM_BUILD_ROOT%{_libdir}/liblua.so
 ln -sf liblua5.4.a $RPM_BUILD_ROOT%{_libdir}/liblua.a
 ln -sf lua5.4 $RPM_BUILD_ROOT%{_includedir}/lua
 ln -sf lua5.4.pc $RPM_BUILD_ROOT%{_pkgconfigdir}/lua.pc
@@ -212,7 +217,11 @@ rm -rf $RPM_BUILD_ROOT
 %files libs
 %defattr(644,root,root,755)
 %doc README
+%if %{with default_lua}
+%attr(755,root,root) /%{_lib}/liblua.so.5.4
+%else
 %attr(755,root,root) %{_libdir}/liblua.so.5.4
+%endif
 %dir %{_libdir}/lua
 %{_libdir}/lua/5.4
 %dir %{_datadir}/lua
