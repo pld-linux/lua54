@@ -10,7 +10,7 @@ Version:	5.4.4
 Release:	1
 License:	MIT
 Group:		Development/Languages
-Source0:	http://www.lua.org/ftp/lua-%{version}.tar.gz
+Source0:	https://www.lua.org/ftp/lua-%{version}.tar.gz
 # Source0-md5:	bd8ce7069ff99a400efd14cf339a727b
 Patch0:		link.patch
 URL:		http://www.lua.org/
