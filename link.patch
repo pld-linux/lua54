@@ -19,7 +19,7 @@
  a:	$(ALL_A)
  
 +liblua.so: $(BASE_O)
-+	$(CC) -o liblua.so.$V -shared $(BASE_O) -Wl,-soname=liblua.so.$V -lm -ldl
++	$(CC) -o liblua.so.$V -shared $(LDFLAGS) $(BASE_O) -Wl,-soname=liblua.so.$V -lm -ldl
 +	ln -sf liblua.so.$V liblua.so
 +
  $(LUA_A): $(BASE_O)

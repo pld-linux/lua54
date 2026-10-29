@@ -6,14 +6,14 @@
 Summary:	A simple lightweight powerful embeddable programming language
 Summary(pl.UTF-8):	Prosty, lekki ale potężny, osadzalny język programowania
 Name:		lua54
-Version:	5.4.8
+Version:	5.4.9
 Release:	1
 License:	MIT
 Group:		Development/Languages
 Source0:	https://www.lua.org/ftp/lua-%{version}.tar.gz
-# Source0-md5:	81cf5265b8634967d8a7480d238168ce
+# Source0-md5:	e9e07f081bd39b694de8578cd8b7c6e5
 Patch0:		link.patch
-URL:		http://www.lua.org/
+URL:		https://www.lua.org/
 %{?with_luastatic:BuildRequires:       dietlibc-static}
 BuildRequires:	readline-devel
 BuildRequires:	sed >= 4.0
@@ -129,7 +129,8 @@ sed -i  -e '/#define LUA_ROOT/s,/usr/local/,%{_prefix}/,' \
 %{__make} -j1 all \
 	PLAT=linux \
 	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags} -Wall -fPIC -DPIC -D_GNU_SOURCE -DLUA_USE_LINUX -DLUA_COMPAT_ALL"
+	CFLAGS="%{rpmcflags} -Wall -fPIC -DPIC -D_GNU_SOURCE -DLUA_USE_LINUX -DLUA_COMPAT_ALL" \
+	MYLDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
